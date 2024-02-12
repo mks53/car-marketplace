@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { auth } from "../firebase";
+import { AuthContext } from "../contexts/authContext";
 
 export default function SignUp() {
+  const { createUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const handleOnSubmit = () => {};
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createUser(formData.email, formData.password);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className="formContainer">
       <form onSubmit={handleOnSubmit}>

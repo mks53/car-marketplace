@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { auth } from "../firebase";
+import { AuthContext } from "../contexts/authContext";
 
 export default function SignUp() {
+  const { loginUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
